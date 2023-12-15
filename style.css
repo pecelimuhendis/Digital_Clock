@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    /*  */
+    justify-content: center;
+    /* ortada */
+    align-items: center;
+    /* dikey ve yatar ortalama */
+    min-height: 100vh;
+    background: rgb(165, 18, 58);
+
+}
+
+.container {
+    position: relative;
+    background-color: rgb(186, 25, 68);
+    min-height: 500px;
+    border-radius: 20px;
+    /* kenar yuvarlama */
+    border-top-left-radius: 225px;
+    border-top-right-radius: 225px;
+    box-shadow: 25px 25px 75px rgba(0, 0, 0, 0.25),
+        /* gölge */
+        10px 50px 70px rgba(0, 0, 0, 0.25),
+        inset 5px 5px 10px rgba(0, 0, 0, 0.25)
+        /* iç gölge */
+        inset 5px 5px 20px rgba(255, 255, 255, 0.2),
+        inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.clock {
+    position: relative;
+    width: 450px;
+    height: 450px;
+    background: rgb(186, 25, 68);
+    border-radius: 50%;
+    /* saat yuvarlaklığı */
+    box-shadow: 10px 50px 70px rgba(0, 0, 0, 0.25),
+        inset 5px 5px 10px rgba(0, 0, 0, 0.25),
+        /* iç gölge */
+        inset 5px 5px 20px rgba(255, 255, 255, 0.2),
+        inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+    display: flex;
+    /* öğelerin yan yana ve soldan başlaması */
+    justify-content: center;
+    /* öğelerin clock a göre ortalanması */
+    align-items: center;
+    /* gerd yapısı gereği ortalar */
+    margin-bottom: 30px;
+}
+
+.clock::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgb(186, 25, 68);
+    border: 3px solid #ffffff;
+    opacity: 0.75;
+    z-index: 4;
+}
+
+.clock span {
+
+    position: absolute;
+    inset: 20px;
+    /* alt üst yanlar gölgesi verir */
+    color: #ffffff;
+    text-align: center;
+    /* 360/12=30 derece */
+    transform: rotate(calc(30deg* var(--i)));
+
+}
+
+.clock span b {
+    font-size: 2em;
+    opacity: 0.75;
+    font-weight: 600;
+    /* google fonttaki değer, px değil */
+    display: inline-block;
+    /* yatayda düz ve yer değişikliği  */
+    transform: rotate(calc(-30deg* var(--i)));
+}
+
+.circle {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border: 1px solid rgba(0, 0, 0, 0.75);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-items: flex-start;
+}
+
+.circle i {
+    position: absolute;
+    width: 6px;
+    background: var(--clr);
+    /* html de tanımlanan renkler */
+    height: 50%;
+    opacity: 0.75;
+    transform-origin: bottom;
+    transform: scaleY(0.5);
+    z-index: 3;
+}
+
+.circle:nth-child(1) i {
+    width: 4px;
+}
+
+.circle:nth-child(2) i {
+    width: 5px;
+}
+
+.circle:nth-child(3) i {
+    width: 6px;
+}
+
+.circle2 {
+    width: 240px;
+    height: 240px;
+    z-index: 2;
+}
+
+.circle3 {
+    width: 180px;
+    height: 180px;
+    z-index: 1;
+}
+
+.circle::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    top: -8px;
+    /* konum olarak cizgi üstüne */
+    background: var(--clr);
+    /* her yuvarlak cizgisinin renginde */
+    box-shadow: 0 0 20px var(--clr);
+
+}
+
+/* dijital saat */
+#time {
+    margin-bottom: 40px;
+    display: flex;
+    padding: 10px 20px;
+    font-size: 2em;
+    font-weight: 600;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 40px;
+    box-shadow: 5px 5px 10px solid rgba(0, 0, 0, 0.25),
+        inset 5px 5px 20px rgba(255, 255, 255, 0.2),
+        inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+    ;
+}
+
+#time div {
+    position: relative;
+    width: 60px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--clr);
+}
+
+/* birinci ve ikinci ifade -saat-dakika */
+#time div:nth-child(1)::after,
+#time div:nth-child(2)::after {
+    content: ':';
+    position: absolute;
+    right: -4px;
+}
+
+/* sonuncu ifade- am/pm */
+#time div:last-child {
+    font-size: 0.7em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+}
+
+/* saniye belirtmek için animasyon tanımlandı */
+#time div:nth-child(2)::after {
+    animation: animate 1s steps(1) infinite;
+}
+
+@keyframes animate {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
