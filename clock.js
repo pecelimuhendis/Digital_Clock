@@ -40,4 +40,24 @@ setInterval(() => {
     seconds.innerHTML = s;
     ampm.innerHTML = am;
 
+//........................................
+    // Güncel tarih
+    var history = new Date();
+
+    // Yıl, ay ve gün bilgilerini al
+    var year = history.getFullYear();
+    var month = history.getMonth() + 1; // JavaScript'te aylar 0-11 arasında indekslenir, bu yüzden 1 ekliyoruz.
+    var gun = history.getDate();
+
+    // Güncellenmiş öğeleri seç
+    var dayElement = document.getElementById("day");
+    var monthElement = document.getElementById("month");
+    var yearElement = document.getElementById("year");
+
+    // Öğelerin içeriğini güncelle
+    dayElement.innerHTML = gun;
+    monthElement.innerHTML = month;
+    yearElement.innerHTML = year;
+
+
 })
